@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Formulário</title>
+</head>
+
+<body>
+
+    <h1>Formulário Doação Legal</h1>
+    <div id="app">
+        <div v-if="!preenchidoFormulario">
+            <input type="text" name="nome" id="nome" v-model="cadastro.nome" placeholder="Nome">
+            <input type="text" name="telefone" id="telefone" v-model="cadastro.telefone" placeholder="Telefone">
+            <input type="text" name="email" id="email" v-model="cadastro.email" placeholder="exemplo@exemplo.com.br">
+            <input type="text" name="cep" id="cep" v-model="cadastro.cep" maxlength="8" v-on:keyup="completarCep" placeholder="0000000-000">
+            <input type="text" name="logradouro" id="logradouro" v-model="cadastro.logradouro" placeholder="Rua/Avenida">
+            <input type="text" name="complemento" id="complemento" v-model="cadastro.complemento" placeholder="Lado Impar / Lado Par">
+            <input type="text" name="numero" id="numero" v-model="cadastro.numero" placeholder="xxxx">
+            <input type="text" name="bairro" id="bairro" v-model="cadastro.bairro" placeholder="Bairro">
+            <input type="text" name="localidade" id="localidade" v-model="cadastro.localidade" placeholder="municipio">
+            <input type="text" name="uf" id="uf" v-model="cadastro.uf" placeholder="Estado">
+            <button v-on:click="cadastrar">Cadastrar</button>
+        </div>
+        <div v-if="preenchidoFormulario">
+            <p>Deu turu certo !</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                cadastro: {
+                    nome: null,
+                    telefone: null,
+                    email: null,
+                    cep: null,
+                    logradouro: null,
+                    complemento: null,
+                    numero: null,
+                    bairro: null,
+                    localidade: null,
+                    uf: null
+                },
+                preenchidoFormulario: false,
+                url: "http://localhost:8181"
+            },
+            methods: {      
+                cadastrar: function () {
+                    console.log(vm.cadastro);
+                    axios.post(this.url + '/clientes', vm.cadastro)
+                        .then(function (response) {
+                            vm.preenchidoFormulario = true;
+                            console.log(response.data);
+                        })
+                        .catch(function (error) {
+                            alert('Deu ruim.');
+                        })
+                },
+                completarCep: function () {
+                    vm.cadastro.cep = vm.cadastro.cep.replace(/\D/g, '');
+                    
+                    if (vm.cadastro.cep.length < 8) {
+                        return;
+                    }
+
+                    axios.get(this.url + '/cep/' + vm.cadastro.cep)
+                        .then(function (response) {
+                            if (response.data.erro === true) {
+                                alert('CEP inválido.');
+                                vm.cadastro.cep = '';
+                                return;
+                            }
+                            vm.cadastro.logradouro = response.data.logradouro;
+                            vm.cadastro.complemento = response.data.complemento;
+                            vm.cadastro.bairro = response.data.bairro;
+                            vm.cadastro.localidade = response.data.localidade;
+                            vm.cadastro.uf = response.data.uf;
+                        })
+                        .catch(function (error) {
+                            alert('Deu ruim.');
+                        })
+                }
+            },
+            mounted: function () {
+            
+            }
+        })    
+    </script>
+</body>
+
+</html>

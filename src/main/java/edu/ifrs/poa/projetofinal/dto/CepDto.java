@@ -15,4 +15,5 @@ public class CepDto {
     private String bairro;
     private String localidade;
     private String uf;
+    private boolean erro;
 }
