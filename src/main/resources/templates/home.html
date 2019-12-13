@@ -1,38 +1,166 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/bulma-0.8.0/css/bulma.css">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Formulário</title>
+    <title>Dashboard Student</title>
+    <link rel="../static/img/logo.png">
 </head>
 
 <body>
 
-    <h1>Formulário Doação Legal</h1>
     <div id="app">
-        <div v-if="!preenchidoFormulario">
-            <input type="text" name="nome" id="nome" v-model="cadastro.nome" placeholder="Nome">
-            <input type="text" name="telefone" id="telefone" v-model="cadastro.telefone" placeholder="Telefone">
-            <input type="text" name="email" id="email" v-model="cadastro.email" placeholder="exemplo@exemplo.com.br">
-            <input type="text" name="cep" id="cep" v-model="cadastro.cep" maxlength="8" v-on:keyup="completarCep" placeholder="0000000-000">
-            <input type="text" name="logradouro" id="logradouro" v-model="cadastro.logradouro" placeholder="Rua/Avenida">
-            <input type="text" name="complemento" id="complemento" v-model="cadastro.complemento" placeholder="Lado Impar / Lado Par">
-            <input type="text" name="numero" id="numero" v-model="cadastro.numero" placeholder="xxxx">
-            <input type="text" name="bairro" id="bairro" v-model="cadastro.bairro" placeholder="Bairro">
-            <input type="text" name="localidade" id="localidade" v-model="cadastro.localidade" placeholder="municipio">
-            <input type="text" name="uf" id="uf" v-model="cadastro.uf" placeholder="Estado">
-            <button v-on:click="cadastrar">Cadastrar</button>
+        <div v-if="!preenchidoFormulario" class="column is-4 is-offset-4">
+            <img src="../static/img/logo.png">
+            <h2 class="subtitle is-4 has-text-link has-text-centered">Contate-nos</h2>
+            <div class="field">
+
+                <label class="label">Nome Completo</label>
+                <div class="control has-icons-left has-icons-right">
+
+                    <input class="input is-focused" type="text" name="nome" id="nome" v-model="cadastro.nome"
+                        placeholder="Ex: João da Silva">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-user"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Telefone</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input is-focused" type="text" name="telefone" id="telefone"
+                        v-model="cadastro.telefone" placeholder="Ex: (11) 99999 9999">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-phone"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">E-mail</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input is-focused" type="text" name="email" id="email" v-model="cadastro.email"
+                        placeholder="Ex: joaodasilva@email.com">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-at"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">CEP</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input is-focused" type="text" name="cep" id="cep" v-model="cadastro.cep" maxlength="8"
+                        v-on:keyup="completarCep" placeholder="Ex: 90000100"><span class="icon is-small is-left">
+                        <i class="fas fa-map-marker"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Logradouro</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input is-focused" type="text" name="logradouro" id="logradouro"
+                        v-model="cadastro.logradouro" placeholder="Ex: Rua F"><span class="icon is-small is-left">
+                        <i class="fas fa-street-view"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Complemento</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input is-focused" type="text" name="complemento" id="complemento"
+                        v-model="cadastro.complemento" placeholder="Ex: Lado Impar"><span class="icon is-small is-left">
+                        <i class="fas fa-map-signs"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Número</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input is-focused" type="text" name="numero" id="numero" v-model="cadastro.numero"
+                        placeholder="Ex: 1234"><span class="icon is-small is-left">
+                        <i class="fas fa-home"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Bairro</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input is-focused" type="text" name="bairro" id="bairro" v-model="cadastro.bairro"
+                        placeholder="Ex: Centro"><span class="icon is-small is-left">
+                        <i class="fas fa-compass"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Localidade</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input is-focused" type="text" name="localidade" id="localidade"
+                        v-model="cadastro.localidade" placeholder="Ex: Lagoa Vermelha"><span
+                        class="icon is-small is-left">
+                        <i class="fas fa-location-arrow"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Estado</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input is-focused" type="text" name="uf" id="uf" v-model="cadastro.uf"
+                        placeholder="Ex: Acre"><span class="icon is-small is-left">
+                        <i class="fas fa-globe"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </div>
+            </div>
+            <div>
+                <button v-on:click="cadastrar" class="button is-link">Cadastrar</button>
+            </div>
         </div>
-        <div v-if="preenchidoFormulario">
-            <p>Deu turu certo !</p>
+        <div v-if="preenchidoFormulario" class="column is-4 is-offset-4">
+            <img src="https://picsum.photos/700/300">
+            <h1 class="title has-text-link has-text-centered">Muito Obrigado !</p>
+                <h2 class="subtitle has-text-justified">Agora você faz parte do time Dashboard Students</h2>
+                <!--<button class="button is-link" src="/home">Voltar</button>-->
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
 
         var vm = new Vue({
@@ -53,21 +181,30 @@
                 preenchidoFormulario: false,
                 url: "http://localhost:8181"
             },
-            methods: {      
+            methods: {
                 cadastrar: function () {
                     console.log(vm.cadastro);
                     axios.post(this.url + '/clientes', vm.cadastro)
                         .then(function (response) {
                             vm.preenchidoFormulario = true;
                             console.log(response.data);
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Oba !',
+                                text: 'Formulário Cadastrado com sucesso'
+                            })
                         })
                         .catch(function (error) {
-                            alert('Deu ruim.');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Não foi possível cadastrar'
+                            })
                         })
                 },
                 completarCep: function () {
                     vm.cadastro.cep = vm.cadastro.cep.replace(/\D/g, '');
-                    
+
                     if (vm.cadastro.cep.length < 8) {
                         return;
                     }
@@ -75,7 +212,11 @@
                     axios.get(this.url + '/cep/' + vm.cadastro.cep)
                         .then(function (response) {
                             if (response.data.erro === true) {
-                                alert('CEP inválido.');
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'CEP inválido'
+                                })
                                 vm.cadastro.cep = '';
                                 return;
                             }
@@ -86,12 +227,16 @@
                             vm.cadastro.uf = response.data.uf;
                         })
                         .catch(function (error) {
-                            alert('Deu ruim.');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'CEP não encontrado'
+                            })
                         })
-                }
+                },
             },
             mounted: function () {
-            
+
             }
         })    
     </script>
