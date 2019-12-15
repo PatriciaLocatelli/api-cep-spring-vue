@@ -16,7 +16,18 @@ public class ClienteService {
         this.repository = repository;
     }
 
+    private void formatarDados(Cliente cliente) {
+        cliente.setNome(cliente.getNome().toUpperCase());
+        cliente.setLogradouro(cliente.getLogradouro().toUpperCase());
+        cliente.setBairro(cliente.getBairro().toUpperCase());
+        cliente.setUf(cliente.getUf().toUpperCase());
+        cliente.setLocalidade(cliente.getLocalidade().toUpperCase());
+        cliente.setComplemento(cliente.getComplemento().toUpperCase());
+        cliente.setEmail(cliente.getEmail().toLowerCase());
+    }
+
     public Cliente adicionar(Cliente cliente) {
+        formatarDados(cliente);
         return repository.save(cliente);
     }
 
@@ -32,6 +43,7 @@ public class ClienteService {
         if (! repository.existsById(id)) {
             throw new RuntimeException("Não achei");
         }
+        formatarDados(cliente);
         return repository.save(cliente);
     }
 
